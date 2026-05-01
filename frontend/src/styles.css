@@ -147,7 +147,7 @@ header.hero p {
 
 .map-wrapper {
   width: 100%;
-  min-height: 320px;
+  min-height: 360px;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 12px;

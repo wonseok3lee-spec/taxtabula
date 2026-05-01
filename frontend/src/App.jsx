@@ -186,7 +186,7 @@ export default function App() {
                 projection="geoAlbersUsa"
                 projectionConfig={{ scale: 1000 }}
                 width={800}
-                height={500}
+                height={520}
                 style={{ width: "100%", height: "auto", display: "block" }}
               >
                 <ZoomableGroup
