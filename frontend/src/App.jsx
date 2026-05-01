@@ -187,6 +187,7 @@ export default function App() {
                 projectionConfig={{ scale: 1000 }}
                 width={800}
                 height={500}
+                style={{ width: "100%", height: "auto", display: "block" }}
               >
                 <ZoomableGroup
                   zoom={zoom}

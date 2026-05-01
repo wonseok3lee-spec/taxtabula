@@ -18,5 +18,6 @@ dist/
 Thumbs.db
 
 # IDE
+.claude/
 .vscode/
 .idea/
