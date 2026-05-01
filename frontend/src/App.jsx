@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { ComposableMap, Geographies, Geography, ZoomableGroup, Marker } from 'react-simple-maps';
 import { scaleLinear } from 'd3-scale';
 
+const API_BASE = import.meta.env.VITE_API_URL || "";
+
 // US states topojson (simplified, hosted)
 const US_TOPO = "https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json";
 
@@ -54,7 +56,7 @@ export default function App() {
   // Fetch credits when state selected
   useEffect(() => {
     if (selectedState) {
-      fetch(`/api/states/${selectedState}`)
+      fetch(`${API_BASE}/api/states/${selectedState}`)
         .then(r => r.json())
         .then(data => setStateCredits(data.credits || []))
         .catch(() => setStateCredits([]));
@@ -74,7 +76,7 @@ export default function App() {
   };
 
   const checkEligibility = async () => {
-    const res = await fetch("/api/eligibility/check", {
+    const res = await fetch(`${API_BASE}/api/eligibility/check`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(scenario),
@@ -84,7 +86,7 @@ export default function App() {
   };
 
   const runCompare = async () => {
-    const res = await fetch("/api/whatif/compare", {
+    const res = await fetch(`${API_BASE}/api/whatif/compare`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
