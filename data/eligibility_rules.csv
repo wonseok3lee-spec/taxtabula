@@ -1,29 +1,268 @@
 credit_id,rule_type,operator,value,description
 dc_schedule_h,residency_state,eq,DC,Must be a DC resident
-dc_schedule_h,residency_duration_months,gte,12,Must have lived in DC for all of the tax year (Jan 1 - Dec 31)
+dc_schedule_h,residency_duration_months,gte,12,Must have lived in DC for all of the tax year
 dc_schedule_h,federal_agi_max_under70,lte,66000,Federal AGI must be $66000 or less if under age 70
 dc_schedule_h,federal_agi_max_70plus,lte,90000,Federal AGI must be $90000 or less if age 70 or older
 dc_schedule_h,claimed_as_dependent,eq,FALSE,Cannot be claimed as a dependent unless 65+
 dc_schedule_h,public_housing,eq,FALSE,Cannot live in public or subsidized housing
-dc_schedule_h,rents_or_owns,in,"rent,own",Must rent or own home (not living rent-free)
+dc_schedule_h,rents_or_owns,in,"rent,own",Must rent or own home
 dc_kcca,residency_state,eq,DC,Must be a DC resident
 dc_kcca,has_dependents,eq,TRUE,Must claim eligible child as dependent
-dc_kcca,child_age_max,lte,3,Child must be under 4 during eligible period
+dc_kcca,child_age_max,lte,3,Child must be under 4
 dc_eitc,residency_state,eq,DC,Must be a DC resident
 dc_eitc,federal_eitc_eligible,eq,TRUE,Must qualify for federal EITC first
-federal_eitc,citizenship,in,"citizen,resident_alien",Cannot be a nonresident alien for any part of the year
-federal_eitc,filing_status,not_in,mfs,Cannot be married filing separately (limited exceptions)
-federal_eitc,investment_income_max,lte,11950,Investment income must be $11950 or less
-federal_eitc,age_min_no_kids,gte,25,Must be at least 25 if claiming without qualifying children
-federal_eitc,age_max_no_kids,lte,64,Must be under 65 if claiming without qualifying children
-federal_eitc,has_valid_ssn,eq,TRUE,Must have valid SSN issued by tax return due date
+dc_senior_property,residency_state,eq,DC,Must be DC homeowner
+dc_senior_property,age_or_disabled,eq,TRUE,Must be 65+ or certified disabled
+dc_senior_property,owns_property,eq,TRUE,Must own and reside in property
+dc_homestead,residency_state,eq,DC,Must own primary DC residence
+dc_homestead,rents_or_owns,eq,own,Owner-occupants only
+va_eitc_refundable,residency_state,eq,VA,Must be full-year VA resident
+va_eitc_refundable,federal_eitc_eligible,eq,TRUE,Must qualify for federal EITC
+va_eitc_nonref,residency_state,eq,VA,Must be VA resident
+va_eitc_nonref,federal_eitc_eligible,eq,TRUE,Must qualify for federal EITC
+va_cli,residency_state,eq,VA,Must be VA resident
+va_cli,below_federal_poverty,eq,TRUE,Family VAGI below federal poverty
+va_osc,residency_state,eq,VA,Must be VA resident
+va_osc,taxed_by_other_state,eq,TRUE,Must have income taxed by another state
+va_livable_home,residency_state,eq,VA,Must be VA resident
+va_livable_home,rents_or_owns,eq,own,Must own primary residence
+md_eitc_refundable,residency_state,eq,MD,Must be MD resident
+md_eitc_refundable,federal_eitc_eligible,eq,TRUE,Must qualify for federal EITC
+md_eitc_nonref,residency_state,eq,MD,Must be MD resident
+md_eitc_nonref,federal_eitc_eligible,eq,TRUE,Must qualify for federal EITC
+md_poverty,residency_state,eq,MD,Must be MD resident
+md_poverty,below_federal_poverty,eq,TRUE,Income at or below federal poverty
+md_ctc,residency_state,eq,MD,Must be MD resident
+md_ctc,has_dependents,eq,TRUE,Must have qualifying child
+md_homeowner_property,residency_state,eq,MD,Must own primary MD residence
+md_homeowner_property,rents_or_owns,eq,own,Homeowners only
+md_homeowner_property,household_income_max,lte,60000,Household income under $60K
+md_student_loan,residency_state,eq,MD,Must be MD resident
+md_student_loan,has_student_loans,eq,TRUE,Must have qualifying student loan debt
+ca_caleitc,residency_state,eq,CA,Must live in CA more than half the year
+ca_caleitc,earned_income_min,gte,1,Must have earned income
+ca_caleitc,earned_income_max,lte,32900,Earned income $32900 or less
+ca_caleitc,investment_income_max,lte,4814,Investment income under $4814
+ca_yctc,residency_state,eq,CA,Must qualify for CalEITC
+ca_yctc,child_age_max,lte,5,Must have qualifying child under 6
+ca_yctc,earned_income_max,lte,35640,Total earned income up to $35640
+ca_fytc,residency_state,eq,CA,Must qualify for CalEITC
+ca_fytc,age_min,gte,18,Must be at least 18
+ca_fytc,age_max,lte,25,Must be 25 or under
+ca_fytc,was_foster_youth,eq,TRUE,Must have been in CA foster care at age 13+
+ca_renters,residency_state,eq,CA,Must rent CA residence
+ca_renters,rents_or_owns,eq,rent,Renters only
+ca_renters,agi_max_single,lte,52000,Income limit ~$52K single
+ca_renters,agi_max_mfj,lte,104000,Income limit ~$104K MFJ
+ny_eitc,residency_state,eq,NY,Must be NY resident
+ny_eitc,federal_eitc_eligible,eq,TRUE,Must qualify for federal EITC
+ny_empire_child,residency_state,eq,NY,Must be full-year NY resident
+ny_empire_child,has_dependents,eq,TRUE,Must have qualifying child under 17
+ny_empire_child,child_age_max,lte,16,Child must be under 17
+ny_real_property,residency_state,eq,NY,Must be NY resident
+ny_real_property,property_value_max,lte,85000,Home market value $85K or less
+ny_college_tuition,residency_state,eq,NY,Must be full-year NY resident
+ny_college_tuition,is_student,eq,TRUE,Must have paid qualified college tuition
+il_eitc,residency_state,eq,IL,Must be IL resident
+il_eitc,federal_eitc_eligible,eq,TRUE,Must qualify for federal EITC
+il_ctc,residency_state,eq,IL,Must qualify for IL EITC
+il_ctc,has_dependents,eq,TRUE,Must have qualifying child under 12
+il_ctc,child_age_max,lte,11,Child must be under 12
+il_property_credit,residency_state,eq,IL,Must be IL resident
+il_property_credit,rents_or_owns,eq,own,Must own primary residence
+ma_eitc,residency_state,eq,MA,Must be MA resident
+ma_eitc,federal_eitc_eligible,eq,TRUE,Must qualify for federal EITC
+ma_ctc,residency_state,eq,MA,Must be MA resident
+ma_ctc,has_dependents,eq,TRUE,Must have qualifying dependent
+ma_circuit_breaker,residency_state,eq,MA,Must be MA resident
+ma_circuit_breaker,age_min,gte,65,Must be 65 or older
+ma_renters,residency_state,eq,MA,Must rent MA primary residence
+ma_renters,rents_or_owns,eq,rent,Renters only
+wa_wftc,residency_state,eq,WA,Must live in WA
+wa_wftc,residency_duration_months,gte,6,Must reside 183+ days
+wa_wftc,federal_eitc_eligible,eq,TRUE,Must qualify for federal EITC (or ITIN equivalent)
+co_eitc,residency_state,eq,CO,Must be CO resident
+co_eitc,federal_eitc_eligible,eq,TRUE,Must qualify for federal EITC
+co_ctc,residency_state,eq,CO,Must be CO resident
+co_ctc,has_dependents,eq,TRUE,Must have qualifying child under 6
+co_ctc,child_age_max,lte,5,Child must be under 6
+co_factc,residency_state,eq,CO,Must be CO resident
+co_factc,has_dependents,eq,TRUE,Must have qualifying child
+co_factc,child_age_max,lte,16,Child must be under 17
+co_ptc,residency_state,eq,CO,Must be CO resident
+co_ptc,age_or_disabled,eq,TRUE,Must be 65+ or disabled
+nj_eitc,residency_state,eq,NJ,Must be NJ resident
+nj_eitc,federal_eitc_eligible,eq,TRUE,Must qualify for federal EITC
+nj_ctc,residency_state,eq,NJ,Must be NJ resident
+nj_ctc,has_dependents,eq,TRUE,Must have qualifying child under 6
+nj_ctc,child_age_max,lte,5,Child must be under 6
+nj_ctc,agi_max_single,lte,80000,Income $80K or less
+nj_property_tax,residency_state,eq,NJ,Must be NJ resident
+nj_property_tax,rents_or_owns,in,"rent,own",Renters or homeowners
+nj_anchor,residency_state,eq,NJ,Must be NJ resident
+nj_anchor,rents_or_owns,in,"rent,own",Renters or homeowners
+pa_forgiveness,residency_state,eq,PA,Must be PA resident
+pa_forgiveness,below_federal_poverty,eq,TRUE,Eligibility income below threshold
+pa_ptrr,residency_state,eq,PA,Must be PA resident
+pa_ptrr,age_or_disabled,eq,TRUE,Must be 65+ or widow(er) 50+ or disabled
+pa_ptrr,household_income_max,lte,48110,Income limit $48110
+pa_wptc,residency_state,eq,PA,Must be PA resident
+pa_wptc,federal_eitc_eligible,eq,TRUE,Must qualify for federal EITC
+or_eitc,residency_state,eq,OR,Must be OR resident
+or_eitc,federal_eitc_eligible,eq,TRUE,Must qualify for federal EITC
+or_ctc,residency_state,eq,OR,Must be OR resident
+or_ctc,has_dependents,eq,TRUE,Must have child under 5
+or_ctc,child_age_max,lte,4,Child must be under 5
+or_wfhdc,residency_state,eq,OR,Must be OR resident
+or_wfhdc,has_earned_income,eq,TRUE,Must have earned income
+mn_wfc,residency_state,eq,MN,Must be MN resident
+mn_wfc,has_earned_income,eq,TRUE,Must have earned income
+mn_ctc,residency_state,eq,MN,Must be MN resident
+mn_ctc,has_dependents,eq,TRUE,Must have qualifying child
+mn_property_refund,residency_state,eq,MN,Must be MN resident
+mn_property_refund,rents_or_owns,in,"rent,own",Renters or homeowners
+mn_renters,residency_state,eq,MN,Must rent MN primary residence
+mn_renters,rents_or_owns,eq,rent,Renters only
+ga_low_income,residency_state,eq,GA,Must be GA resident
+ga_low_income,federal_agi_max_under70,lte,20000,Federal AGI under $20K
+ga_ctc,residency_state,eq,GA,Must be GA resident
+ga_ctc,has_dependents,eq,TRUE,Must have qualifying child
+ga_education,residency_state,eq,GA,Must be GA resident
+nc_ctc_dependent,residency_state,eq,NC,Must be NC resident
+nc_ctc_dependent,has_dependents,eq,TRUE,Must have qualifying child
+nc_property_homestead,residency_state,eq,NC,Must own NC primary residence
+nc_property_homestead,age_or_disabled,eq,TRUE,Must be 65+ or totally disabled
+nc_property_homestead,household_income_max,lte,36700,Income limit $36700
+mi_eitc,residency_state,eq,MI,Must be MI resident
+mi_eitc,federal_eitc_eligible,eq,TRUE,Must qualify for federal EITC
+mi_homestead,residency_state,eq,MI,Must be MI resident
+mi_homestead,rents_or_owns,in,"rent,own",Renters or homeowners
+mi_homestead,household_income_max,lte,71500,Total household resources under $71500
+mi_home_heating,residency_state,eq,MI,Must be MI resident
+az_dependent,residency_state,eq,AZ,Must be AZ resident
+az_dependent,has_dependents,eq,TRUE,Must have qualifying dependent
+az_property_credit,residency_state,eq,AZ,Must be AZ resident
+az_property_credit,age_min,gte,65,Must be 65 or older
+az_charitable,residency_state,eq,AZ,Must be AZ resident
+oh_eitc,residency_state,eq,OH,Must be OH resident
+oh_eitc,federal_eitc_eligible,eq,TRUE,Must qualify for federal EITC
+oh_ctc,residency_state,eq,OH,Must be OH resident
+oh_ctc,has_dependents,eq,TRUE,Must have child under 6
+oh_ctc,child_age_max,lte,5,Child must be under 6
+oh_homestead,residency_state,eq,OH,Must own OH primary residence
+oh_homestead,age_or_disabled,eq,TRUE,Must be 65+ or disabled
+oh_homestead,household_income_max,lte,38600,Income limit ~$38600
+ct_eitc,residency_state,eq,CT,Must be CT resident
+ct_eitc,federal_eitc_eligible,eq,TRUE,Must qualify for federal EITC
+ct_property,residency_state,eq,CT,Must be CT resident
+ct_property,rents_or_owns,eq,own,Homeowners only
+ct_ctc,residency_state,eq,CT,Must be CT resident
+ct_ctc,has_dependents,eq,TRUE,Must have qualifying child
+hi_eitc,residency_state,eq,HI,Must be HI resident
+hi_eitc,federal_eitc_eligible,eq,TRUE,Must qualify for federal EITC
+hi_food,residency_state,eq,HI,Must be HI resident
+hi_low_income,residency_state,eq,HI,Must be HI resident
+hi_low_income,rents_or_owns,eq,rent,Renters only
+hi_low_income,household_income_max,lte,30000,Income under $30K
+in_eitc,residency_state,eq,IN,Must be IN resident
+in_eitc,federal_eitc_eligible,eq,TRUE,Must qualify for federal EITC
+in_unified_elderly,residency_state,eq,IN,Must be IN resident
+in_unified_elderly,age_min,gte,65,Must be 65 or older
+in_renters,residency_state,eq,IN,Must rent IN primary residence
+in_renters,rents_or_owns,eq,rent,Renters only
+ks_eitc,residency_state,eq,KS,Must be KS resident
+ks_eitc,federal_eitc_eligible,eq,TRUE,Must qualify for federal EITC
+ks_food,residency_state,eq,KS,Must be KS resident
+me_eitc,residency_state,eq,ME,Must be ME resident
+me_eitc,federal_eitc_eligible,eq,TRUE,Must qualify for federal EITC
+me_property_fairness,residency_state,eq,ME,Must be ME resident
+me_property_fairness,rents_or_owns,in,"rent,own",Renters or homeowners
+me_dep_exemption,residency_state,eq,ME,Must be ME resident
+me_dep_exemption,has_dependents,eq,TRUE,Must have qualifying child
+mo_eitc,residency_state,eq,MO,Must be MO resident
+mo_eitc,federal_eitc_eligible,eq,TRUE,Must qualify for federal EITC
+mo_property,residency_state,eq,MO,Must be MO resident
+mo_property,age_or_disabled,eq,TRUE,Must be 65+ or 100% disabled
+mt_eitc,residency_state,eq,MT,Must be MT resident
+mt_eitc,federal_eitc_eligible,eq,TRUE,Must qualify for federal EITC
+mt_elderly,residency_state,eq,MT,Must be MT resident
+mt_elderly,age_min,gte,62,Must be 62 or older
+ne_eitc,residency_state,eq,NE,Must be NE resident
+ne_eitc,federal_eitc_eligible,eq,TRUE,Must qualify for federal EITC
+ne_property,residency_state,eq,NE,Must be NE resident
+ne_property,rents_or_owns,eq,own,Homeowners only
+nm_eitc,residency_state,eq,NM,Must be NM resident
+nm_eitc,federal_eitc_eligible,eq,TRUE,Must qualify for federal EITC
+nm_low_income,residency_state,eq,NM,Must be NM resident
+nm_low_income,below_federal_poverty,eq,TRUE,Low-income filers
+nm_property,residency_state,eq,NM,Must be NM resident
+nm_property,age_min,gte,65,Must be 65 or older
+ok_eitc,residency_state,eq,OK,Must be OK resident
+ok_eitc,federal_eitc_eligible,eq,TRUE,Must qualify for federal EITC
+ok_sales_tax,residency_state,eq,OK,Must be OK resident
+ri_eitc,residency_state,eq,RI,Must be RI resident
+ri_eitc,federal_eitc_eligible,eq,TRUE,Must qualify for federal EITC
+ri_property,residency_state,eq,RI,Must be RI resident
+ri_property,age_or_disabled,eq,TRUE,Must be 65+ or disabled
+sc_eitc,residency_state,eq,SC,Must be SC resident
+sc_eitc,federal_eitc_eligible,eq,TRUE,Must qualify for federal EITC
+sc_two_wage,residency_state,eq,SC,Must be SC resident
+sc_two_wage,filing_status,eq,mfj,Must file MFJ
+ut_ctc,residency_state,eq,UT,Must be UT resident
+ut_ctc,has_dependents,eq,TRUE,Must have qualifying child
+ut_ctc,child_age_max,lte,4,Child must be under 5
+ut_retirement,residency_state,eq,UT,Must be UT resident
+ut_retirement,age_min,gte,65,Must be 65 or older
+vt_eitc,residency_state,eq,VT,Must be VT resident
+vt_eitc,federal_eitc_eligible,eq,TRUE,Must qualify for federal EITC
+vt_ctc,residency_state,eq,VT,Must be VT resident
+vt_ctc,has_dependents,eq,TRUE,Must have child under 7
+vt_ctc,child_age_max,lte,6,Child must be under 7
+vt_renter,residency_state,eq,VT,Must rent VT primary residence
+vt_renter,rents_or_owns,eq,rent,Renters only
+wv_lif,residency_state,eq,WV,Must be WV resident
+wv_lif,below_federal_poverty,eq,TRUE,Low-income filers
+wv_homestead,residency_state,eq,WV,Must own WV primary residence
+wv_homestead,age_min,gte,65,Must be 65 or older
+wi_eitc,residency_state,eq,WI,Must be WI resident
+wi_eitc,federal_eitc_eligible,eq,TRUE,Must qualify for federal EITC
+wi_eitc,has_dependents,eq,TRUE,Must have qualifying child (no childless credit)
+wi_homestead,residency_state,eq,WI,Must be WI resident
+wi_homestead,household_income_max,lte,24680,Income under $24680
+ia_eitc,residency_state,eq,IA,Must be IA resident
+ia_eitc,federal_eitc_eligible,eq,TRUE,Must qualify for federal EITC
+ia_tuition,residency_state,eq,IA,Must be IA resident
+ia_tuition,has_dependents,eq,TRUE,Must have qualifying dependent
+de_eitc,residency_state,eq,DE,Must be DE resident
+de_eitc,federal_eitc_eligible,eq,TRUE,Must qualify for federal EITC
+ky_family,residency_state,eq,KY,Must be KY resident
+ky_family,below_federal_poverty,eq,TRUE,Low-income filers
+la_eitc,residency_state,eq,LA,Must be LA resident
+la_eitc,federal_eitc_eligible,eq,TRUE,Must qualify for federal EITC
+nh_education,residency_state,eq,NH,Must be NH resident
+ms_no_state,residency_state,eq,MS,No state EITC currently
+ar_no_state,residency_state,eq,AR,No state EITC currently
+al_no_state,residency_state,eq,AL,No state EITC currently
+nd_eitc,residency_state,eq,ND,Must be ND resident
+sd_no_tax,residency_state,eq,SD,No state income tax
+ak_pfd,residency_state,eq,AK,Must be AK resident
+nv_no_tax,residency_state,eq,NV,No state income tax
+tn_no_tax,residency_state,eq,TN,No state income tax
+wy_no_tax,residency_state,eq,WY,No state income tax
+id_grocery,residency_state,eq,ID,Must be ID resident
+federal_eitc,citizenship,in,"citizen,resident_alien",Cannot be a nonresident alien
+federal_eitc,filing_status,not_in,mfs,Cannot be MFS (limited exceptions)
+federal_eitc,investment_income_max,lte,11950,Investment income $11950 or less
+federal_eitc,age_min_no_kids,gte,25,Must be at least 25 if claiming without children
+federal_eitc,age_max_no_kids,lte,64,Must be under 65 if claiming without children
+federal_eitc,has_valid_ssn,eq,TRUE,Must have valid SSN
 federal_eitc,us_residency_months,gte,6,Must live in US more than half the year
-federal_ctc,child_age_max,lte,16,Qualifying child must be under 17 at end of tax year
+federal_ctc,child_age_max,lte,16,Qualifying child must be under 17
 federal_ctc,has_valid_ssn,eq,TRUE,Child must have valid SSN
 federal_ctc,agi_phaseout_single,lte,200000,Phaseout begins at $200K single
 federal_ctc,agi_phaseout_mfj,lte,400000,Phaseout begins at $400K MFJ
 federal_aotc,is_student,eq,TRUE,Must be pursuing a degree at least half-time
-federal_aotc,years_completed,lte,4,Must not have completed first 4 years of post-secondary
+federal_aotc,years_completed,lte,4,Must not have completed first 4 years
 federal_aotc,agi_phaseout_single,lte,90000,Fully phases out at $90K single
 federal_aotc,agi_phaseout_mfj,lte,180000,Fully phases out at $180K MFJ
 federal_llc,agi_phaseout_single,lte,90000,Fully phases out at $90K single
@@ -33,3 +272,5 @@ federal_savers,agi_max_hoh,lte,57375,2025 income limit head of household
 federal_savers,agi_max_mfj,lte,76500,2025 income limit married filing jointly
 federal_premium,enrolled_marketplace,eq,TRUE,Must enroll in Marketplace coverage
 federal_premium,filing_status,not_in,mfs,Cannot be MFS unless domestic abuse exception
+federal_cdcc,has_earned_income,eq,TRUE,Must have earned income
+federal_cdcc,has_dependents,eq,TRUE,Must have qualifying child under 13 or disabled dependent

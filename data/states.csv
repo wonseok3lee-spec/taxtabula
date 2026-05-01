@@ -1,12 +1,53 @@
 code,name,has_state_income_tax,tax_structure,top_rate,tier,notes
-DC,District of Columbia,TRUE,progressive,10.75,1,Has unique Schedule H rent/property credit
-VA,Virginia,TRUE,progressive,5.75,1,
-MD,Maryland,TRUE,progressive,5.75,1,Counties levy additional 2.25-3.2% income tax
+AL,Alabama,TRUE,progressive,5.0,2,
+AK,Alaska,FALSE,none,0,2,No state income tax
+AZ,Arizona,TRUE,flat,2.5,1,Lowest flat tax in US
+AR,Arkansas,TRUE,progressive,3.9,2,
 CA,California,TRUE,progressive,13.3,1,Highest top rate in US
-NY,New York,TRUE,progressive,10.9,1,NYC residents face additional city income tax
-IL,Illinois,TRUE,flat,4.95,1,Flat tax with limited credits
-MA,Massachusetts,TRUE,flat,5.0,1,4% surtax on income over $1M (Millionaires Tax)
-TX,Texas,FALSE,none,0,1,No state income tax
+CO,Colorado,TRUE,flat,4.4,1,Flat tax with generous EITC and CTC
+CT,Connecticut,TRUE,progressive,6.99,1,40% EITC + $250 boost
+DE,Delaware,TRUE,progressive,6.6,2,
+DC,District of Columbia,TRUE,progressive,10.75,1,Has unique Schedule H rent/property credit
 FL,Florida,FALSE,none,0,1,No state income tax
+GA,Georgia,TRUE,flat,5.39,1,New CTC of $250 per child (TY 2026)
+HI,Hawaii,TRUE,progressive,11.0,1,High refundable EITC + Food/Excise Credit
+ID,Idaho,TRUE,flat,5.695,2,
+IL,Illinois,TRUE,flat,4.95,1,Flat tax with limited credits
+IN,Indiana,TRUE,flat,3.0,1,Has 10% EITC + new newborn credit
+IA,Iowa,TRUE,flat,3.8,2,
+KS,Kansas,TRUE,progressive,5.7,1,17% refundable EITC
+KY,Kentucky,TRUE,flat,4.0,2,
+LA,Louisiana,TRUE,progressive,4.25,2,
+ME,Maine,TRUE,progressive,7.15,1,50% EITC for childless / 25% with children
+MD,Maryland,TRUE,progressive,5.75,1,Counties levy additional 2.25-3.2% income tax
+MA,Massachusetts,TRUE,flat,5.0,1,4% surtax on income over $1M (Millionaires Tax)
+MI,Michigan,TRUE,flat,4.25,1,EITC at 30% of federal + Homestead Property Credit
+MN,Minnesota,TRUE,progressive,9.85,1,Working Family Credit and most generous CTC ($1750)
+MS,Mississippi,TRUE,flat,4.4,2,
+MO,Missouri,TRUE,progressive,4.7,1,10% nonrefundable EITC
+MT,Montana,TRUE,progressive,5.9,1,20% refundable EITC (doubled in 2025)
+NE,Nebraska,TRUE,progressive,5.2,1,10% refundable EITC
+NV,Nevada,FALSE,none,0,2,No state income tax
+NH,New Hampshire,FALSE,none,0,2,No tax on wages (interest/dividends tax repealed 2025)
+NJ,New Jersey,TRUE,progressive,10.75,1,High EITC match (40% of federal)
+NM,New Mexico,TRUE,progressive,5.9,1,25% refundable EITC + Working Families Credit
+NY,New York,TRUE,progressive,10.9,1,NYC residents face additional city income tax
+NC,North Carolina,TRUE,flat,4.5,1,Eliminated state EITC in 2014
+ND,North Dakota,TRUE,progressive,2.5,2,
+OH,Ohio,TRUE,progressive,3.5,1,Nonrefundable EITC at 30% of federal
+OK,Oklahoma,TRUE,progressive,4.75,2,5% refundable EITC
+OR,Oregon,TRUE,progressive,9.9,1,EITC at 9% (12% for kids under 3)
+PA,Pennsylvania,TRUE,flat,3.07,1,Flat tax with unique tax forgiveness program
+RI,Rhode Island,TRUE,progressive,5.99,1,16% refundable EITC
+SC,South Carolina,TRUE,progressive,6.2,2,125% nonrefundable EITC (highest match but nonref)
+SD,South Dakota,FALSE,none,0,2,No state income tax
+TN,Tennessee,FALSE,none,0,2,No state income tax
+TX,Texas,FALSE,none,0,1,No state income tax
+UT,Utah,TRUE,flat,4.55,2,
+VT,Vermont,TRUE,progressive,8.75,1,38% refundable EITC + CTC $1000
+VA,Virginia,TRUE,progressive,5.75,1,Reciprocity with KY/MD/DC/WV/PA
 WA,Washington,FALSE,none,0,1,No income tax but has Working Families Tax Credit
+WV,West Virginia,TRUE,progressive,5.12,2,
+WI,Wisconsin,TRUE,progressive,7.65,1,EITC varies 4-34% based on # children
+WY,Wyoming,FALSE,none,0,2,No state income tax
 US,United States (Federal),TRUE,progressive,37.0,0,Federal credits apply nationally
