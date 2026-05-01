@@ -1,0 +1,12 @@
+code,name,has_state_income_tax,tax_structure,top_rate,tier,notes
+DC,District of Columbia,TRUE,progressive,10.75,1,Has unique Schedule H rent/property credit
+VA,Virginia,TRUE,progressive,5.75,1,
+MD,Maryland,TRUE,progressive,5.75,1,Counties levy additional 2.25-3.2% income tax
+CA,California,TRUE,progressive,13.3,1,Highest top rate in US
+NY,New York,TRUE,progressive,10.9,1,NYC residents face additional city income tax
+IL,Illinois,TRUE,flat,4.95,1,Flat tax with limited credits
+MA,Massachusetts,TRUE,flat,5.0,1,4% surtax on income over $1M (Millionaires Tax)
+TX,Texas,FALSE,none,0,1,No state income tax
+FL,Florida,FALSE,none,0,1,No state income tax
+WA,Washington,FALSE,none,0,1,No income tax but has Working Families Tax Credit
+US,United States (Federal),TRUE,progressive,37.0,0,Federal credits apply nationally

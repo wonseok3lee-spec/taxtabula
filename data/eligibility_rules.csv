@@ -1,0 +1,35 @@
+credit_id,rule_type,operator,value,description
+dc_schedule_h,residency_state,eq,DC,Must be a DC resident
+dc_schedule_h,residency_duration_months,gte,12,Must have lived in DC for all of the tax year (Jan 1 - Dec 31)
+dc_schedule_h,federal_agi_max_under70,lte,66000,Federal AGI must be $66000 or less if under age 70
+dc_schedule_h,federal_agi_max_70plus,lte,90000,Federal AGI must be $90000 or less if age 70 or older
+dc_schedule_h,claimed_as_dependent,eq,FALSE,Cannot be claimed as a dependent unless 65+
+dc_schedule_h,public_housing,eq,FALSE,Cannot live in public or subsidized housing
+dc_schedule_h,rents_or_owns,in,"rent,own",Must rent or own home (not living rent-free)
+dc_kcca,residency_state,eq,DC,Must be a DC resident
+dc_kcca,has_dependents,eq,TRUE,Must claim eligible child as dependent
+dc_kcca,child_age_max,lte,3,Child must be under 4 during eligible period
+dc_eitc,residency_state,eq,DC,Must be a DC resident
+dc_eitc,federal_eitc_eligible,eq,TRUE,Must qualify for federal EITC first
+federal_eitc,citizenship,in,"citizen,resident_alien",Cannot be a nonresident alien for any part of the year
+federal_eitc,filing_status,not_in,mfs,Cannot be married filing separately (limited exceptions)
+federal_eitc,investment_income_max,lte,11950,Investment income must be $11950 or less
+federal_eitc,age_min_no_kids,gte,25,Must be at least 25 if claiming without qualifying children
+federal_eitc,age_max_no_kids,lte,64,Must be under 65 if claiming without qualifying children
+federal_eitc,has_valid_ssn,eq,TRUE,Must have valid SSN issued by tax return due date
+federal_eitc,us_residency_months,gte,6,Must live in US more than half the year
+federal_ctc,child_age_max,lte,16,Qualifying child must be under 17 at end of tax year
+federal_ctc,has_valid_ssn,eq,TRUE,Child must have valid SSN
+federal_ctc,agi_phaseout_single,lte,200000,Phaseout begins at $200K single
+federal_ctc,agi_phaseout_mfj,lte,400000,Phaseout begins at $400K MFJ
+federal_aotc,is_student,eq,TRUE,Must be pursuing a degree at least half-time
+federal_aotc,years_completed,lte,4,Must not have completed first 4 years of post-secondary
+federal_aotc,agi_phaseout_single,lte,90000,Fully phases out at $90K single
+federal_aotc,agi_phaseout_mfj,lte,180000,Fully phases out at $180K MFJ
+federal_llc,agi_phaseout_single,lte,90000,Fully phases out at $90K single
+federal_llc,agi_phaseout_mfj,lte,180000,Fully phases out at $180K MFJ
+federal_savers,agi_max_single,lte,38250,2025 income limit single
+federal_savers,agi_max_hoh,lte,57375,2025 income limit head of household
+federal_savers,agi_max_mfj,lte,76500,2025 income limit married filing jointly
+federal_premium,enrolled_marketplace,eq,TRUE,Must enroll in Marketplace coverage
+federal_premium,filing_status,not_in,mfs,Cannot be MFS unless domestic abuse exception
