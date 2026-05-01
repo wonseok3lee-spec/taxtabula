@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { ComposableMap, Geographies, Geography, ZoomableGroup, Marker } from 'react-simple-maps';
+import { ComposableMap, Geographies, Geography, ZoomableGroup, Marker, Line } from 'react-simple-maps';
 import { scaleLinear } from 'd3-scale';
+import { geoCentroid } from 'd3-geo';
 
 const API_BASE = import.meta.env.VITE_API_URL || "";
 
@@ -25,6 +26,30 @@ const STATE_NAME_TO_CODE = {
   "South Carolina": "SC", "South Dakota": "SD", "Tennessee": "TN", "Texas": "TX",
   "Utah": "UT", "Vermont": "VT", "Virginia": "VA", "Washington": "WA",
   "West Virginia": "WV", "Wisconsin": "WI", "Wyoming": "WY",
+};
+
+const STATE_FIPS_TO_CODE = {
+  "01": "AL", "02": "AK", "04": "AZ", "05": "AR", "06": "CA", "08": "CO",
+  "09": "CT", "10": "DE", "11": "DC", "12": "FL", "13": "GA", "15": "HI",
+  "16": "ID", "17": "IL", "18": "IN", "19": "IA", "20": "KS", "21": "KY",
+  "22": "LA", "23": "ME", "24": "MD", "25": "MA", "26": "MI", "27": "MN",
+  "28": "MS", "29": "MO", "30": "MT", "31": "NE", "32": "NV", "33": "NH",
+  "34": "NJ", "35": "NM", "36": "NY", "37": "NC", "38": "ND", "39": "OH",
+  "40": "OK", "41": "OR", "42": "PA", "44": "RI", "45": "SC", "46": "SD",
+  "47": "TN", "48": "TX", "49": "UT", "50": "VT", "51": "VA", "53": "WA",
+  "54": "WV", "55": "WI", "56": "WY"
+};
+
+// Northeast cluster — labels placed in Atlantic to the east, [longitude, latitude]
+const LABEL_OFFSETS = {
+  "NH": [-69.5, 43.5],
+  "MA": [-69.0, 41.8],
+  "CT": [-71.5, 40.5],
+  "RI": [-69.5, 41.0],
+  "VT": [-71.5, 44.8],
+  "NJ": [-72.8, 39.5],
+  "DE": [-73.5, 38.5],
+  "MD": [-73.0, 37.8],
 };
 
 export default function App() {
@@ -157,7 +182,12 @@ export default function App() {
                 <button className="zoom-btn" onClick={() => setZoom(Math.max(zoom / 1.5, 1))}>−</button>
                 <button className="zoom-btn reset" onClick={() => { setZoom(1); setCenter([-96, 38]); }}>Reset</button>
               </div>
-              <ComposableMap projection="geoAlbersUsa" projectionConfig={{ scale: 1000 }} width={800} height={500}>
+              <ComposableMap
+                projection="geoAlbersUsa"
+                projectionConfig={{ scale: 1000 }}
+                width={800}
+                height={500}
+              >
                 <ZoomableGroup
                   zoom={zoom}
                   center={center}
@@ -170,29 +200,73 @@ export default function App() {
                     {({ geographies }) =>
                       geographies.map((geo) => {
                         const stateName = geo.properties.name;
-                        const code = STATE_NAME_TO_CODE[stateName];
+                        const code = STATE_NAME_TO_CODE[stateName] || STATE_FIPS_TO_CODE[geo.id];
                         const isTier1 = TIER_1_STATES.includes(code);
                         const isSelected = selectedState === code;
+                        const centroid = geoCentroid(geo);
+                        const offsetCoords = LABEL_OFFSETS[code];
                         return (
-                          <Geography
-                            key={geo.rsmKey}
-                            geography={geo}
-                            onClick={() => handleStateClick(geo)}
-                            style={{
-                              default: {
-                                fill: isSelected ? "#185fa5" : (isTier1 ? "#85b7eb" : "#e5e5e0"),
-                                stroke: "#fafaf7",
-                                strokeWidth: 0.5,
-                                outline: "none",
-                                cursor: "pointer",
-                              },
-                              hover: {
-                                fill: isTier1 ? "#378ade" : "#d3d1c7",
-                                outline: "none",
-                              },
-                              pressed: { outline: "none" },
-                            }}
-                          />
+                          <g key={geo.rsmKey}>
+                            <Geography
+                              geography={geo}
+                              onClick={() => handleStateClick(geo)}
+                              style={{
+                                default: {
+                                  fill: isSelected ? "#185fa5" : (isTier1 ? "#85b7eb" : "#e5e5e0"),
+                                  stroke: "#fafaf7",
+                                  strokeWidth: 0.5,
+                                  outline: "none",
+                                  cursor: "pointer",
+                                },
+                                hover: {
+                                  fill: isTier1 ? "#378ade" : "#d3d1c7",
+                                  outline: "none",
+                                },
+                                pressed: { outline: "none" },
+                              }}
+                            />
+                            {code && code !== "DC" && !offsetCoords && (
+                              <Marker coordinates={centroid}>
+                                <text
+                                  textAnchor="middle"
+                                  dy={3}
+                                  fontSize={9}
+                                  fontWeight={700}
+                                  fill="#ffffff"
+                                  stroke="rgba(0,0,0,0.4)"
+                                  strokeWidth={0.5}
+                                  paintOrder="stroke"
+                                  style={{ pointerEvents: "none", userSelect: "none" }}
+                                >
+                                  {code}
+                                </text>
+                              </Marker>
+                            )}
+                            {offsetCoords && (
+                              <>
+                                <Line
+                                  from={centroid}
+                                  to={offsetCoords}
+                                  stroke="#94a3b8"
+                                  strokeWidth={0.5}
+                                  strokeLinecap="round"
+                                />
+                                <Marker coordinates={offsetCoords}>
+                                  <text
+                                    textAnchor="start"
+                                    dy={3}
+                                    dx={3}
+                                    fontSize={8}
+                                    fontWeight={700}
+                                    fill="#475569"
+                                    style={{ pointerEvents: "none", userSelect: "none" }}
+                                  >
+                                    {code}
+                                  </text>
+                                </Marker>
+                              </>
+                            )}
+                          </g>
                         );
                       })
                     }
